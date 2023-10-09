@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: todo.microservice
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [app-name, data, data-jpa, gradle, http-client-test, java, java-application, jdbc-hikari, junit, kafka, logback, mariadb, micronaut-build, netty-server, properties, readme, serialization-jackson, shade, test-resources]

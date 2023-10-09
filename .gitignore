@@ -1,0 +1,15 @@
+*.pdf
+*.log
+*.aux
+*.gz
+*.out
+*.cut
+*.fls
+*.fdb*
+*.blg
+*.bbl
+*.bak
+**/.DS_Store
+
+build/
+bin/
