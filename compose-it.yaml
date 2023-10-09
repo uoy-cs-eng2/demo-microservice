@@ -77,6 +77,9 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      # Default topic settings
+      - KAFKA_CFG_NUM_PARTITIONS=6
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=3
       # JMX port for metrics
       - JMX_PORT=9997
       - KAFKA_JMX_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=kafka-0 -Dcom.sun.management.jmxremote.rmi.port=9997
@@ -103,6 +106,9 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      # Default topic settings
+      - KAFKA_CFG_NUM_PARTITIONS=6
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=3
       # JMX port for metrics
       - JMX_PORT=9997
       - KAFKA_JMX_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=kafka-1 -Dcom.sun.management.jmxremote.rmi.port=9997
@@ -124,6 +130,9 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      # Default topic settings
+      - KAFKA_CFG_NUM_PARTITIONS=6
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=3
       # JMX port for metrics
       - JMX_PORT=9997
       - KAFKA_JMX_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=kafka-2 -Dcom.sun.management.jmxremote.rmi.port=9997
