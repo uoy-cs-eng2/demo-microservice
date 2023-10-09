@@ -31,7 +31,7 @@ import todo.cli.lists.UpdateItemCommand;
 
 @Command(
 	name = "todo-cli",
-	description = "Manages lists",
+	description = "Manages the To-Do microservice",
 	mixinStandardHelpOptions = true,
 	subcommands = {
 		AddItemCommand.class,

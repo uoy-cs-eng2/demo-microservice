@@ -31,15 +31,11 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import io.micronaut.core.annotation.Creator;
-import io.micronaut.validation.Validated;
 import jakarta.inject.Singleton;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
 /**
  * Gateway object for the Currency API by fawazahmed0 on <a href="https://github.com/fawazahmed0/currency-api">GitHub</a>.
  */
-@Validated
 @Singleton
 public class CurrencyGateway {
 
@@ -92,11 +88,20 @@ public class CurrencyGateway {
 		return availableCurrencies.isEmpty() || availableCurrencies.get().contains(currency);
 	}
 
-	public Optional<Double> exchange(@Pattern(regexp=CurrencyClient.DATE_PATTERN) String date, @NotBlank String source, @NotBlank String target) {
+	public Optional<Double> exchange(String date, String source, String target) {
 		try {
 			// API always uses lowercase names for currencies
 			source = source.toLowerCase();
 			target = target.toLowerCase();
+
+			if (!isValidCurrency(source)) {
+				LOGGER.warn("Invalid source currency {}", source);
+				return Optional.empty();
+			} else if (!isValidCurrency(target)) {
+				LOGGER.warn("Invalid target currency {}", target);
+				return Optional.empty();
+			}
+
 			return Optional.of(currencyData.get(new CurrencyPair(date, source, target)));
 		} catch (ExecutionException e) {
 			LOGGER.error(e.getMessage(), e);

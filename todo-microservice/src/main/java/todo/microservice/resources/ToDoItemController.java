@@ -32,7 +32,6 @@ import todo.microservice.ToDoConfiguration;
 import todo.microservice.domain.ToDoItem;
 import todo.microservice.events.ToDoProducer;
 import todo.microservice.repositories.ToDoItemRepository;
-import todo.microservice.repositories.ToDoListRepository;
 import todo.microservice.services.ListItemServices;
 import todo.microservice.services.ListItemUpdateRequest;
 
@@ -42,9 +41,6 @@ public class ToDoItemController {
 
 	@Inject
 	private ToDoItemRepository repo;
-
-	@Inject
-	private ToDoListRepository listRepo;
 
 	@Inject
 	private ListItemServices itemServices;
