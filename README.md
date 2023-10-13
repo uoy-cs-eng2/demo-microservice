@@ -32,7 +32,7 @@ For a list of the endpoints, consult the [`ToDoListClient`](todo-cli/src/main/ja
 
 ## Development with Eclipse
 
-To work on this project from Eclipse 4.9 and onwards, make sure you have [Eclipse Buildship](https://www.vogella.com/tutorials/EclipseGradle/article.html) installed, and that you are using [Java 17](https://adoptium.net/) or later.
+To work on this project from Eclipse 4.9 and onwards, make sure you have [Eclipse Buildship](https://www.vogella.com/tutorials/EclipseGradle/article.html) installed, and that you are using [Java 11](https://adoptium.net/) or later.
 
 Clone the project, and run this command to generate the relevant Eclipse-specific projects:
 
