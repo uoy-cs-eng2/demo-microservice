@@ -213,6 +213,7 @@ public class ToDoListController {
 
 	private HttpResponse<String> addItem(ToDoItem item, ToDoList list) {
 		itemServices.create(list, item);
+		kafkaClient.itemCreated(list.getId(), item);
 
 		final String itemURL = ToDoItemController.generateURL(item);
 		return HttpResponse.created(String.format(
