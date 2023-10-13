@@ -1,7 +1,7 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.0.4"
-    id("io.micronaut.test-resources") version "4.0.4"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.7.10"
+    id("io.micronaut.test-resources") version "3.7.10"
 }
 
 version = "0.1"
@@ -18,24 +18,22 @@ dependencies {
 
     // HTTP request validation
     annotationProcessor("io.micronaut:micronaut-http-validation")
-    implementation("io.micronaut.validation:micronaut-validation")
 
-    // Data binding via JPA and Hibernate to MariaDB
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.sql:micronaut-hibernate-jpa")
+    implementation("jakarta.annotation:jakarta.annotation-api")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+
+    // Declarative HTTP client and circuit breaker
+    implementation("io.micronaut:micronaut-http-client")
 
     // Basic Kafka support
     implementation("io.micronaut.kafka:micronaut-kafka")
 
     // Kafka Streams support (requires having at least one stream, or build will fail)
     implementation("io.micronaut.kafka:micronaut-kafka-streams")
-
-    // Declarative HTTP client and circuit breaker
-    implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut:micronaut-retry")
 
     // Logging via Logback
     runtimeOnly("ch.qos.logback:logback-classic")
@@ -44,13 +42,13 @@ dependencies {
     implementation("com.google.guava:guava:32.1.2-jre")
 }
 
+
 application {
     mainClass.set("todo.microservice.Application")
 }
-
 java {
-    sourceCompatibility = JavaVersion.toVersion("17")
-    targetCompatibility = JavaVersion.toVersion("17")
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
 }
 
 graalvmNative.toolchainDetection = false
@@ -65,6 +63,6 @@ micronaut {
 
 // We need the C++ standard library for RocksDB (used by Kafka Streams)
 tasks.named("dockerfile") {
-  baseImage = "eclipse-temurin:17-alpine"
+  baseImage = "eclipse-temurin:11-alpine"
   instruction "RUN apk add libstdc++ && rm -rf /var/cache/apk/*"
 }

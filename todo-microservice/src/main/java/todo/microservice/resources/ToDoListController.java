@@ -30,7 +30,7 @@ import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import todo.microservice.ToDoConfiguration;
 import todo.microservice.domain.ToDoItem;
 import todo.microservice.domain.ToDoList;

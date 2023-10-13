@@ -60,7 +60,16 @@ public class CurrencyGateway {
 		}
 	}
 
-	private record CurrencyPair(String date, String source, String target) {}
+	private class CurrencyPair {
+		private final String date, source, target;
+
+		private CurrencyPair(String date, String source, String target) {
+			this.date = date;
+			this.source = source;
+			this.target = target;
+		}
+
+	}
 
 	// We only ask for the available set of currencies at the start
 	private final Optional<Set<String>> availableCurrencies;

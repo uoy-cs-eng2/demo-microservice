@@ -59,7 +59,7 @@ public class ToDoStreams {
 		final KTable<Windowed<Long>, Long> table = itemEvents
 			.map((k, v) -> new KeyValue<>(v.getItem().getList().getId(), "item_" + v.getType().name()))
 			.groupByKey(Grouped.with(Serdes.Long(), Serdes.String()))
-			.windowedBy(SlidingWindows.ofTimeDifferenceAndGrace(Duration.ofMinutes(10), Duration.ofMinutes(1)))
+			.windowedBy(SlidingWindows.withTimeDifferenceAndGrace(Duration.ofMinutes(10), Duration.ofMinutes(1)))
 			.count();
 
 		// Save the metrics

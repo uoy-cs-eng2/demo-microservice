@@ -16,7 +16,7 @@
 package todo.microservice;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
-import jakarta.validation.constraints.Min;
+import javax.validation.constraints.Min;
 
 @ConfigurationProperties("todo")
 public class ToDoConfiguration {

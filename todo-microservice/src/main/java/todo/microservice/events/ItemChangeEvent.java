@@ -53,5 +53,5 @@ public class ItemChangeEvent {
 	public String toString() {
 		return "ItemChangeEvent [type=" + type + ", item=" + item + "]";
 	}
-	
+
 }
