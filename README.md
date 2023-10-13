@@ -106,3 +106,19 @@ cd todo-cli
 ```
 
 This will produce an executable in `build/native/nativeCompile` that you can redistribute.
+
+## Micronaut 3.x version of the microservice
+
+The [`todo-microservice-v3`](./todo-microservice-v3) directory has a version of the same microservice, based on Micronaut 3.x and Java 11.
+
+It is functionally equivalent to the Micronaut 4.x version.
+It includes a [backport](https://github.com/micronaut-projects/micronaut-data/commit/1190f94e0286f773d21e805531f61cb23a7e18fa) of a known issue with JSON serialisation of `Page` objects, which has been fixed in Micronaut 4.x.
+
+Note that Micronaut 3.x uses Hibernate 5, whereas Micronaut 4.x uses Hibernate 6.
+This means that Micronaut 3.x uses a slightly different database structure: `hibernate_sequence` is a regular table with Micronaut 3.x, and an actual [sequence](https://mariadb.com/kb/en/sequences/) with Micronaut 4.x.
+
+If you want to try out the demo microservice in a different Micronaut version from Docker Compose, make sure to drop all volumes first, with:
+
+```shell
+./compose-it.sh down -v
+```
