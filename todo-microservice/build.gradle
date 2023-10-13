@@ -65,5 +65,6 @@ micronaut {
 
 // We need the C++ standard library for RocksDB (used by Kafka Streams)
 tasks.named("dockerfile") {
+  baseImage = "eclipse-temurin:17-alpine"
   instruction "RUN apk add libstdc++ && rm -rf /var/cache/apk/*"
 }
