@@ -49,4 +49,9 @@ public class ItemChangeEvent {
 		this.item = item;
 	}
 
+	@Override
+	public String toString() {
+		return "ItemChangeEvent [type=" + type + ", item=" + item + "]";
+	}
+
 }

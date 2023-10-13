@@ -49,4 +49,9 @@ public class ListChangeEvent {
 		this.list = list;
 	}
 
+	@Override
+	public String toString() {
+		return "ListChangeEvent [type=" + type + ", list=" + list + "]";
+	}
+	
 }
