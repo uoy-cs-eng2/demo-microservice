@@ -19,6 +19,7 @@ dependencies {
     // HTTP request validation
     annotationProcessor("io.micronaut:micronaut-http-validation")
 
+    // Data mapping via Hibernate and JPA to a MariaDB database
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
@@ -38,7 +39,7 @@ dependencies {
     // Logging via Logback
     runtimeOnly("ch.qos.logback:logback-classic")
 
-    // Native image
+    // Type hints for native-image
     annotationProcessor("io.micronaut:micronaut-graal")
     compileOnly("org.graalvm.nativeimage:svm")
 
@@ -55,7 +56,17 @@ java {
     targetCompatibility = JavaVersion.toVersion("11")
 }
 
-graalvmNative.toolchainDetection = false
+graalvmNative {
+  toolchainDetection = false
+
+  /* Only needed to run Kafka Streams in a native image. Not needed otherwise. */
+  binaries.configureEach {
+    buildArgs.add('-H:IncludeResources="librocksdbjni-linux64.*"')
+    buildArgs.add('-H:IncludeResources="kafka/kafka-streams-version.properties"')
+    buildArgs.add('-H:JNIConfigurationFiles=resources/kafka-streams/jni-config.json')
+  }
+}
+
 micronaut {
     runtime("netty")
     testRuntime("junit5")

@@ -63,10 +63,24 @@ cd ..
 ./compose-it.sh up -d
 ```
 
-This will build the Docker image of the microservice, and then start it together with its dependencies and some web-based UIs to help debugging.
+This will build a Java-based Docker image of the microservice, and then start it together with its dependencies and some web-based UIs to help debugging.
 
-Alternatively, you can use  `./gradlew dockerBuildative` to make Micronaut use GraalVM to produce Docker images based on binary executables, which should boot significantly faster.
-This will take a long time to compile, and will require a reasonably strong machine.
+### Native Docker images (advanced, optional)
+
+Alternatively, you can use  `./gradlew dockerBuildNative` to make Micronaut use GraalVM to produce Docker images based on binary executables, which should have better performance and use less memory.
+This will take a long time to compile, and will require a strong machine: the process can take 6GiB+ of RAM on its own.
+
+*Note*: Kafka Streams (KStreams for now on) does not have official GraalVM native image support, so this example microservice needed a number of custom settings to support it.
+See below:
+
+* [`build.gradle`](./todo-microservice/build.gradle) adds several `native-image` build arguments in its `graalvmNative` block to include two additional resources in the native image (the RocksDB dynamic library and the Kafka Streams `.properties`), and provide a `jni-config.json` file that exposes some RocksDB classes from JNI. These are based on the [sample project by Pádraig de Buitléar](https://github.com/pdebuitlear/kstreams-demo/blob/main/src/main/java/com/example/demo/config/hints/KafkaStreamsHints.java), which used Spring Boot GraalVM instead.
+* The main `Application` class includes a `@TypeHint` annotation which was iteratively refined to include the classes accessed via reflection by Kafka Streams for this particular example. It is likely that you may need to add more classes for a different example.
+
+The above customisations were made to show that it is indeed possible to run KStreams in a native image, but they are likely to require changes with new KStreams releases.
+You can ignore them if you are not building native images.
+
+We recommend to avoid using native images if using KStreams, until they add official GraalVM native image support.
+You should have no issues using plain Kafka consumers and producers in native images, however, as the Micronaut Kafka project does include the [necessary GraalVM configuration files](https://github.com/micronaut-projects/micronaut-kafka/tree/4.5.x/kafka/src/main/resources/META-INF/native-image/io.micronaut.kafka/micronaut-kafka) for it.
 
 ## Distributing the CLI client
 
