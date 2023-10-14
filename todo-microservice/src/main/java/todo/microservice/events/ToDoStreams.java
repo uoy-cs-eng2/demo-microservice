@@ -38,16 +38,14 @@ import jakarta.inject.Singleton;
 public class ToDoStreams {
 
 	@Inject
-	private ItemChangeEventSerde itemChangeSerde;
+	ItemChangeEventSerde itemChangeSerde;
 
 	@Singleton
 	@Named("list-change-metrics")
 	KStream<Long, ItemChangeEvent> changeMetricsStream(ConfiguredStreamBuilder builder) {
 		Properties props = builder.getConfiguration();
-		props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-		props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 		props.put(StreamsConfig.APPLICATION_ID_CONFIG, "todo-streams");
-		
+
 		// Fetch all the things happening to list items
 		final KStream<Long, ItemChangeEvent> itemEvents = builder
 			.stream(ToDoProducer.TOPIC_ITEMS, Consumed.with(Serdes.Long(), itemChangeSerde));

@@ -38,6 +38,10 @@ dependencies {
     // Logging via Logback
     runtimeOnly("ch.qos.logback:logback-classic")
 
+    // Native image
+    annotationProcessor("io.micronaut:micronaut-graal")
+    compileOnly("org.graalvm.nativeimage:svm")
+
     // Caching and any other useful data structures
     implementation("com.google.guava:guava:32.1.2-jre")
 }
@@ -61,8 +65,9 @@ micronaut {
     }
 }
 
-// We need the C++ standard library for RocksDB (used by Kafka Streams)
+// We need the C++ standard library for RocksDB (used by Kafka Streams),
+// and the glibc compatibility layer.
 tasks.named("dockerfile") {
   baseImage = "eclipse-temurin:11-alpine"
-  instruction "RUN apk add libstdc++ && rm -rf /var/cache/apk/*"
+  instruction "RUN apk add --no-cache libstdc++ gcompat"
 }
