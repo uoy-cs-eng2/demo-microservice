@@ -90,19 +90,3 @@ cd todo-cli
 ./gradlew dockerBuild       # for Java-based image
 ./gradlew dockerBuildNative # for native image
 ```
-
-### Local native executable
-
-Instead of a Java program, you can produce a native image, which should boot significantly faster, and does not require having Java installed.
-
-You will need to have a GraalVM JDK installed: it is recommended to use [SDKMAN](https://sdkman.io/) to set it up.
-Once you have SDKMAN installed, you can run:
-
-```sh
-sdk install java 17.0.8-graalce
-sdk use java 17.0.8-graalce
-cd todo-cli
-./gradlew nativeCompile
-```
-
-This will produce an executable in `build/native/nativeCompile` that you can redistribute.
