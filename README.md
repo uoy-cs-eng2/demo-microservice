@@ -118,6 +118,6 @@ You can also use `dockerBuild` and `dockerBuildNative` for `todo-cli`, similarly
 
 ```sh
 cd todo-cli
-./gradlew dockerBuild       # for Java-based image
-./gradlew dockerBuildNative # for native image
+./gradlew clean dockerBuild       # for Java-based image
+./gradlew clean dockerBuildNative # for native image
 ```
