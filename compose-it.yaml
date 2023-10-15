@@ -1,7 +1,6 @@
 # Docker Compose file for integration testing of the
 # todo-microservices Docker image.
 
-version: "2"
 services:
   # Our database management system
   db:
