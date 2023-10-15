@@ -25,6 +25,12 @@ class ToDoItem {
 ToDoList *-- "0..n" ToDoItem: contains
 ```
 
+## C4 container model
+
+The system can be described through the following [C4 container model](https://c4model.com/):
+
+![C4 container model](structurizr/container-diagram.svg)
+
 ## Endpoints
 
 The microservice has RESTful endpoints for both lists and items.
@@ -81,6 +87,17 @@ You can ignore them if you are not building native images.
 
 We recommend to avoid using native images if using KStreams, until they add official GraalVM native image support.
 You should have no issues using plain Kafka consumers and producers in native images, however, as the Micronaut Kafka project does include the [necessary GraalVM configuration files](https://github.com/micronaut-projects/micronaut-kafka/tree/4.5.x/kafka/src/main/resources/META-INF/native-image/io.micronaut.kafka/micronaut-kafka) for it.
+
+## Viewing and editing the C4 model
+
+The above C4 model was created using the textual [Structurizr DSL](https://docs.structurizr.com/dsl/).
+
+The Compose file includes a container that runs the [Structurizr Lite](https://structurizr.com/help/lite) Docker image, which will automatically visualise the contents of the [`structurizr/workspace.dsl`](structurizr/workspace.dsl) file.
+After running `./compose-it.sh up -d`, Structurizr Lite is available from this URL:
+
+http://localhost:8081/
+
+To experiment with the Structurizr DSL, edit the `workspace.dsl` with your preferred text editor, and reload the page.
 
 ## Distributing the CLI client
 

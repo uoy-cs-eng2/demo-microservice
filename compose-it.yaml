@@ -139,6 +139,14 @@ services:
     volumes:
       - kafka_2_data:/bitnami/kafka
 
+  # Web-based viewer of C4 models using the Structurizr DSL
+  structurizr:
+    image: structurizr/lite:latest
+    ports:
+      - 8081:8080
+    volumes:
+      - ./structurizr:/usr/local/structurizr
+
 volumes:
   mariadb_data:
     driver: local
